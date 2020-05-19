@@ -6,3 +6,9 @@ build:
 
 publish:
 	poetry publish -r test
+
+lint:
+	poetry run flake8 gendiff tests
+
+test:
+	poetry run pytest --cov=gendiff tests/ --cov-report xml
