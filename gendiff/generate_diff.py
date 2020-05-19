@@ -11,7 +11,7 @@ def generate_diff(path_to_file1, path_to_file2):
 
     before_keys = set(before)
     after_keys = set(after)
-    
+
     result = []
     for key in before_keys & after_keys:
         if before[key] == after[key]:
@@ -19,7 +19,7 @@ def generate_diff(path_to_file1, path_to_file2):
         else:
             result.append(to_str(key, after[key], '+'))
             result.append(to_str(key, before[key], '-'))
-    
+
     result.extend(
         [to_str(key, before[key], '-') for key in before_keys - after_keys]
     )
