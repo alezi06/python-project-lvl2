@@ -1,6 +1,6 @@
 env:
   global:
-    CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+    - CC_TEST_REPORTER_ID=34c07c083c045cc86bf6a5476dc33e588e5196600230b16826d5a35ad26ef197
 
 language: python
 python: 3.8
