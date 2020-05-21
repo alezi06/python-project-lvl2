@@ -1,4 +1,5 @@
-import json
+import os
+from gendiff.parser import parse
 
 
 def to_str(key, value, flag=' '):
@@ -6,8 +7,11 @@ def to_str(key, value, flag=' '):
 
 
 def generate_diff(path_to_file1, path_to_file2):
-    before = json.load(open(path_to_file1))
-    after = json.load(open(path_to_file2))
+    _, extension1 = os.path.splitext(path_to_file1)
+    _, extension2 = os.path.splitext(path_to_file2)
+
+    before = parse(open(path_to_file1), extension1[1:])
+    after = parse(open(path_to_file2), extension2[1:])
 
     before_keys = set(before)
     after_keys = set(after)

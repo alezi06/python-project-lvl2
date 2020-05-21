@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "alezi06-gendiff"
-version = "0.2.0"
+version = "0.3.0"
 description = ""
 authors = ["alezi06 <alezi06@mail.ru>"]
 packages = [
@@ -12,6 +12,7 @@ gendiff = "gendiff.scripts.gendiff:main"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+PyYAML = "^5.3.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.4.2"

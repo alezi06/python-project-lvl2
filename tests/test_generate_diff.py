@@ -18,3 +18,8 @@ def test_generate_diff():
         get_path('before.json'),
         get_path('after.json')
     ) == read(get_path('result'))
+
+    assert generate_diff(
+        get_path('before.yml'),
+        get_path('after.yml')
+    ) == read(get_path('result'))
