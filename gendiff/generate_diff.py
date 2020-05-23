@@ -1,9 +1,28 @@
 import os
 from gendiff.parser import parse
+from gendiff.formatter import render_to_format
 
 
-def to_str(key, value, flag=' '):
-    return f'  {flag} {key}: {value}'
+def build_diff(before, after):
+    diff = []
+    before_keys = set(before)
+    after_keys = set(after)
+
+    for key in before_keys & after_keys:
+        if isinstance(before[key], dict) and isinstance(after[key], dict):
+            diff.append(('nested', key, build_diff(before[key], after[key])))
+        elif before[key] == after[key]:
+            diff.append(('unchanged', key, after[key]))
+        else:
+            diff.append(('changed', key, (before[key], after[key])))
+
+    for key in before_keys - after_keys:
+        diff.append(('removed', key, before[key]))
+
+    for key in after_keys - before_keys:
+        diff.append(('added', key, after[key]))
+
+    return diff
 
 
 def generate_diff(path_to_file1, path_to_file2):
@@ -13,22 +32,6 @@ def generate_diff(path_to_file1, path_to_file2):
     before = parse(open(path_to_file1), extension1[1:])
     after = parse(open(path_to_file2), extension2[1:])
 
-    before_keys = set(before)
-    after_keys = set(after)
+    diff = build_diff(before, after)
 
-    result = []
-    for key in before_keys & after_keys:
-        if before[key] == after[key]:
-            result.append(to_str(key, after[key]))
-        else:
-            result.append(to_str(key, after[key], '+'))
-            result.append(to_str(key, before[key], '-'))
-
-    result.extend(
-        [to_str(key, before[key], '-') for key in before_keys - after_keys]
-    )
-    result.extend(
-        [to_str(key, after[key], '+') for key in after_keys - before_keys]
-    )
-
-    return '{\n' + '\n'.join(result) + '\n}'
+    return render_to_format(diff)

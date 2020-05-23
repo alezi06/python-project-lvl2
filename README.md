@@ -10,4 +10,4 @@ How to install:
 python -m pip install --user -i https://test.pypi.org/simple/ alezi06-gendiff --extra-index-url https://pypi.org/simple/
 ```
 
-[![asciicast](https://asciinema.org/a/bHxLgzEHcXUIzJYnfMkvqSBLn.svg)](https://asciinema.org/a/bHxLgzEHcXUIzJYnfMkvqSBLn)
+[![asciicast](https://asciinema.org/a/tSA0G5CCPKtsEq98Pn3n2hfUa.svg)](https://asciinema.org/a/tSA0G5CCPKtsEq98Pn3n2hfUa)
