@@ -17,9 +17,22 @@ def test_generate_diff():
     assert generate_diff(
         get_path('before.json'),
         get_path('after.json')
-    ) == read(get_path('result'))
+    ) == read(get_path('pretty'))
 
     assert generate_diff(
         get_path('before.yml'),
-        get_path('after.yml')
-    ) == read(get_path('result'))
+        get_path('after.yml'),
+        'pretty'
+    ) == read(get_path('pretty'))
+
+    assert generate_diff(
+        get_path('before.json'),
+        get_path('after.json'),
+        'plain'
+    ) == read(get_path('plain'))
+
+    assert generate_diff(
+        get_path('before.yml'),
+        get_path('after.yml'),
+        'plain'
+    ) == read(get_path('plain'))

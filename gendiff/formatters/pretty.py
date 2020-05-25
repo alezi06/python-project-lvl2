@@ -36,5 +36,5 @@ def render(items, depth=1):
     )
 
 
-def render_to_format(diff):
+def render_to_pretty(diff):
     return '{\n' + render(diff) + '\n}'
