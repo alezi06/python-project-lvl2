@@ -25,7 +25,7 @@ def build_diff(before, after):
     return result
 
 
-def generate_diff(path_to_file1, path_to_file2, output='pretty'):
+def generate_diff(path_to_file1, path_to_file2, output):
     _, extension1 = os.path.splitext(path_to_file1)
     _, extension2 = os.path.splitext(path_to_file2)
 

@@ -1,4 +1,5 @@
 import os
+import pytest
 from gendiff.generate_diff import generate_diff
 
 
@@ -13,26 +14,34 @@ def read(path_to_file):
     return result
 
 
-def test_generate_diff():
-    assert generate_diff(
-        get_path('before.json'),
-        get_path('after.json')
-    ) == read(get_path('pretty'))
+@pytest.mark.parametrize(
+    ('before', 'after', 'output', 'expected'), [
+        (
+            get_path('before.json'), get_path('after.json'),
+            'pretty', read(get_path('pretty'))
+        ),
+        (
+            get_path('before.yml'), get_path('after.yml'),
+            'pretty', read(get_path('pretty'))
+        ),
+        (
+            get_path('before.json'), get_path('after.json'),
+            'plain', read(get_path('plain'))
+        ),
+        (
+            get_path('before.yml'), get_path('after.yml'),
+            'plain', read(get_path('plain'))
+        ),
+        (
+            get_path('before.json'), get_path('after.json'),
+            'json', read(get_path('json'))
+        ),
+        (
+            get_path('before.yml'), get_path('after.yml'),
+            'json', read(get_path('json'))
+        ),
 
-    assert generate_diff(
-        get_path('before.yml'),
-        get_path('after.yml'),
-        'pretty'
-    ) == read(get_path('pretty'))
-
-    assert generate_diff(
-        get_path('before.json'),
-        get_path('after.json'),
-        'plain'
-    ) == read(get_path('plain'))
-
-    assert generate_diff(
-        get_path('before.yml'),
-        get_path('after.yml'),
-        'plain'
-    ) == read(get_path('plain'))
+    ]
+)
+def test_generate_diff(before, after, output, expected):
+    assert generate_diff(before, after, output) == expected

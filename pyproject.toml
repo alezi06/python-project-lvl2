@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "alezi06-gendiff"
-version = "0.5.0"
+version = "0.6.0"
 description = ""
 authors = ["alezi06 <alezi06@mail.ru>"]
 packages = [
