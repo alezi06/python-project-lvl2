@@ -7,7 +7,7 @@
 ### Install:
 
 ```
-python -m pip install --user -i https://test.pypi.org/simple/ alezi06-gendiff --extra-index-url https://pypi.org/simple/
+python -m pip install --user -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ alezi06-gendiff
 ```
 
 ### Usage:
@@ -30,4 +30,4 @@ optional arguments:
 
 Asciinema:
 
-[![asciicast](https://asciinema.org/a/5rnvT3BHjvy0IYenRXTvx2IlS.svg)](https://asciinema.org/a/5rnvT3BHjvy0IYenRXTvx2IlS)
+[![asciicast](https://asciinema.org/a/WTEMtymXx96fITavIFfJRoadp.svg)](https://asciinema.org/a/WTEMtymXx96fITavIFfJRoadp)
