@@ -19,7 +19,7 @@ def render(diff_data, depth=1):
             lines.append(
                 f'{indent(depth)}{symbol} {key}: {to_str(value, depth)}'
             )
-        
+
         if status == diff.NESTED:
             lines.append(
                 f'{indent(depth)}  {key}: ' + '{\n' +

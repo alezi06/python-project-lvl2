@@ -14,7 +14,6 @@ def get_formatter(arg):
         raise argparse.ArgumentTypeError(msg)
 
 
-
 def parse_args():
     parser = argparse.ArgumentParser(description='Generate diff')
     parser.add_argument('first_file')

@@ -6,3 +6,5 @@ from gendiff.format.json import format as json
 FORMATTERS = (JSON, PLAIN, PRETTY) = (
     'json', 'plain', 'pretty'
 )
+
+__all__ = ('json', 'plain', 'pretty')

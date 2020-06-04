@@ -29,10 +29,10 @@ def build_diff(before, after):
             result[key] = (CHANGED, (before[key], after[key]))
 
     result.update(
-        {key : (REMOVED, before[key]) for key in keys_before - keys_after}
+        {key: (REMOVED, before[key]) for key in keys_before - keys_after}
     )
     result.update(
-        {key : (ADDED, after[key]) for key in keys_after - keys_before}
+        {key: (ADDED, after[key]) for key in keys_after - keys_before}
     )
     return result
 
