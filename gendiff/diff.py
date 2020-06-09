@@ -9,18 +9,19 @@ REMOVED, ADDED = 'removed', 'added'
 
 def parse(path_to_file):
     _, extension = os.path.splitext(path_to_file)
-    if extension in {'.json', '.JSON', '.Json'}:
+    extension = extension.lower()
+    if extension == '.json':
         return json.load(open(path_to_file))
-    elif extension in {'.yml', '.YML', '.yaml'}:
+    elif extension in {'.yml', '.yaml'}:
         return yaml.safe_load(open(path_to_file))
+    else:
+        raise ValueError(f'Неверный формат файла: {extension}')
 
 
 def build_diff(before, after):
-    keys_before = before.keys()
-    keys_after = after.keys()
     result = {}
 
-    for key in keys_before & keys_after:
+    for key in before.keys() & after.keys():
         if isinstance(before[key], dict) and isinstance(after[key], dict):
             result[key] = (NESTED, build_diff(before[key], after[key]))
         elif before[key] == after[key]:
@@ -28,12 +29,14 @@ def build_diff(before, after):
         else:
             result[key] = (CHANGED, (before[key], after[key]))
 
-    result.update(
-        {key: (REMOVED, before[key]) for key in keys_before - keys_after}
-    )
-    result.update(
-        {key: (ADDED, after[key]) for key in keys_after - keys_before}
-    )
+    def update_result_with(status, dict1, dict2):
+        result.update(
+            {key: (status, dict1[key]) for key in dict1.keys() - dict2.keys()}
+        )
+
+    update_result_with(REMOVED, before, after)
+    update_result_with(ADDED, after, before)
+
     return result
 
 

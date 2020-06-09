@@ -22,7 +22,7 @@ def render(diff_data, acc):
         elif status == diff.CHANGED:
             old, new = value
             lines.append(
-                f"Property '{get_full_path(acc, key)}' was changed. " +
+                f"Property '{get_full_path(acc, key)}' was changed. "
                 f"From {to_str(old)} to {to_str(new)}"
             )
         elif status == diff.REMOVED:
@@ -31,7 +31,7 @@ def render(diff_data, acc):
             )
         elif status == diff.ADDED:
             lines.append(
-                f"Property '{get_full_path(acc, key)}' " +
+                f"Property '{get_full_path(acc, key)}' "
                 f"was added with value: {to_str(value)}"
             )
 

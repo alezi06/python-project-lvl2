@@ -9,7 +9,7 @@ def to_str(value, depth):
     if not isinstance(value, dict):
         return value
     result = '\n'.join([f'{k}: {v}' for k, v in value.items()])
-    return '{\n' + f'{indent(depth + 3)}{result}\n{indent(depth + 1)}' + '}'
+    return f'{{\n{indent(depth + 3)}{result}\n{indent(depth + 1)}}}'
 
 
 def render(diff_data, depth=1):
@@ -22,8 +22,8 @@ def render(diff_data, depth=1):
 
         if status == diff.NESTED:
             lines.append(
-                f'{indent(depth)}  {key}: ' + '{\n' +
-                f'{render(value, depth + 2)}\n{indent(depth + 1)}' + '}'
+                f'{indent(depth)}  {key}: '
+                f'{{\n{render(value, depth + 2)}\n{indent(depth + 1)}}}'
             )
         elif status == diff.UNCHANGED:
             store(' ', value)
@@ -40,4 +40,4 @@ def render(diff_data, depth=1):
 
 
 def format(diff):
-    return '{\n' + render(diff) + '\n}'
+    return f'{{\n{render(diff)}\n}}'
